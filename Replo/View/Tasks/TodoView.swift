@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct TodoView: View {
+    
+    @Binding var task: TaskModel
+    @ObservedObject var vm: ReploViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Button {
+                task.isCompleted.toggle()
+            } label: {
+                Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "checkmark.circle")
+            }
+            
+            VStack{
+                Text("\(task.tasks)")
+            }
+        }
     }
 }
 
 #Preview {
-    TodoView()
+    TodoView(task: .constant(TaskModel(tasks: "밥 먹기", category: .health)), vm: ReploViewModel())
 }
