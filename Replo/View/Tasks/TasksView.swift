@@ -10,9 +10,17 @@ import SwiftUI
 struct TasksView: View {
     
     @ObservedObject var vm: ReploViewModel
+    @State private var searchText: String = ""
     
     var body: some View {
-        Text("Tasks View")
+        NavigationView {
+            VStack{
+                
+            }
+            .navigationTitle("My Taskts")
+            .searchable(text: $searchText, prompt: "Search tasks...") // 검색바 생성 -> iOS 15부터 사용 가능
+            .padding()
+        }
     }
 }
 
