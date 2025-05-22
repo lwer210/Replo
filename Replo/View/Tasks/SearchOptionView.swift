@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct CategoryView: View {
+struct SearchOptionView: View {
     
-    var searchOption: SearchOption // 검색 옵션
+    var category: Category // 검색 옵션
     var icon: String // 아이콘
     var isActive: Bool // 활성 여부
     var width: CGFloat // width 값
@@ -28,7 +28,7 @@ struct CategoryView: View {
                         .frame(width: 30, height: 30)
                         .foregroundColor(isActive ? Color.white : Color.black)
                     
-                    Text(searchOption.rawValue)
+                    Text(category.rawValue)
                         .foregroundColor(isActive ? Color.white : Color.black)
                 }
             }
@@ -37,5 +37,5 @@ struct CategoryView: View {
 }
 
 #Preview {
-    CategoryView(searchOption: .all, icon: "square.grid.2x2", isActive: true, width: 90)
+    SearchOptionView(category: .all, icon: "square.grid.2x2", isActive: false, width: 90)
 }
