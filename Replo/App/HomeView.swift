@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject private var vm: ReploViewModel = ReploViewModel()
+    @StateObject private var vm: TaskViewModel = TaskViewModel()
     
     var body: some View {
         TabView{
@@ -17,12 +17,6 @@ struct HomeView: View {
                 .tabItem {
                     Image(systemName: "list.bullet.clipboard")
                     Text("Tasks")
-                }
-            
-            TodayView(vm: vm) // 오늘 할 일 View
-                .tabItem {
-                    Image(systemName: "rectangle.fill")
-                    Text("Today")
                 }
             
             // TODO: ProfileView 추가 예정(아직 API 요청 안배움)
