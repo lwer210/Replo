@@ -15,6 +15,25 @@ struct TasksView: View {
         NavigationView {
             VStack{
                 
+                ForEach(vm.tasks, id: \.self){item in
+                    TaskListView(vm: vm, task: item)
+                }
+                
+                Spacer()
+                
+                HStack{
+                    TextField("입력", text: $vm.taskSearchText)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
+                    
+                    Button {
+                        vm.addTask(text: vm.taskSearchText)
+                        vm.taskSearchText = ""
+                    } label: {
+                        Image(systemName: "arrow.up")
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
             }
             .navigationTitle("My Tasks")
             .padding()
