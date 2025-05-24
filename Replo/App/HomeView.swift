@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 메인 화면
 struct HomeView: View {
     
     @StateObject private var vm: TaskViewModel = TaskViewModel()
