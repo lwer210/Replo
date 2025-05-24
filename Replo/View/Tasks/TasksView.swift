@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Task View 화면
 struct TasksView: View {
     
     @ObservedObject var vm: TaskViewModel
@@ -23,16 +24,29 @@ struct TasksView: View {
                 
                 HStack{
                     TextField("입력", text: $vm.taskSearchText)
-                        .textFieldStyle(.roundedBorder)
                         .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color(.systemGray4))
+                        )
+                        
                     
                     Button {
                         vm.addTask(text: vm.taskSearchText)
                         vm.taskSearchText = ""
                     } label: {
-                        Image(systemName: "arrow.up")
+                        Image(systemName: "arrowshape.up.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal)
+                            .padding(.vertical)
+                            .background(.blue)
+                            .cornerRadius(100)
                     }
-                    .buttonStyle(.borderedProminent)
                 }
             }
             .navigationTitle("My Tasks")
