@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+/// Task 요소 컴포넌트
 struct TaskListView: View {
     
     @ObservedObject var vm: TaskViewModel
@@ -20,24 +22,43 @@ struct TaskListView: View {
                 .shadow(color: .black.opacity(0.2), radius: 5, x:0, y:4)
             
             HStack{
-                Button {
-                    vm.toggleIsCompleted(task: task)
-                } label: {
-                    Image(systemName: vm.checkIsCompleted(task: task) ? "checkmark.square.fill" : "checkmark.square")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20)
+                HStack (spacing: 20){
+                    Button {
+                        vm.toggleIsCompleted(task: task)
+                    } label: {
+                        Image(systemName: vm.checkIsCompleted(task: task) ? "checkmark.square.fill" : "checkmark.square")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                    }
+                    
+                    
+                    Button {
+                        vm.removeTask(task: task)
+                    } label: {
+                        Image(systemName: "trash")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                            .foregroundStyle(Color.red)
+                    }
                 }
                 .padding()
                 
                 Spacer()
                 
-                Text(task.todo)
-                    .font(.title3)
-                    .bold()
-                    .strikethrough(vm.checkIsCompleted(task: task))
-                    .foregroundStyle(vm.checkIsCompleted(task: task) ? .gray : .black)
-                    .padding()
+                VStack(alignment: .trailing){
+                    Text(task.todo)
+                        .font(.title3)
+                        .bold()
+                        .strikethrough(vm.checkIsCompleted(task: task))
+                        .foregroundStyle(vm.checkIsCompleted(task: task) ? .gray : .black)
+                    
+                    Text(DateFormatterManage.fullDateFormatter.string(from: task.createdAt))
+                        .font(.subheadline)
+                    
+                }
+                .padding()
             }
             .frame(width: 350, height: 80)
         }

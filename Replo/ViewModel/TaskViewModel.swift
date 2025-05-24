@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-// Task ViewModel 선언
+
+/// 할 일 View Model 클래스
 class TaskViewModel: ObservableObject{
     
     /// Task 배열 필드
@@ -19,7 +20,7 @@ class TaskViewModel: ObservableObject{
     
     /// Tasks 배열에 요소 추가
     ///
-    /// - Parameters text: Task에 추가할 텍스트 요소값
+    /// - Parameter text: Task에 추가할 텍스트 요소값
     func addTask(text: String){
         if !text.isEmpty{ // text가 빈값이 아닐 때만 추가
             let task = Task(isComplete: false, todo: text)
@@ -29,7 +30,7 @@ class TaskViewModel: ObservableObject{
     
     /// Task 완료 / 취소 처리 메서드
     ///
-    /// - Parameters task: 완료 / 취소 처리할 Task
+    /// - Parameter task: 완료 / 취소 처리할 Task
     func toggleIsCompleted(task: Task){
         let index = tasks.firstIndex(where: {
             $0.id == task.id
@@ -42,7 +43,7 @@ class TaskViewModel: ObservableObject{
     
     /// Task 완료 / 취소 여부 확인 메서드
     ///
-    /// - Parameters task: 완료 / 취소 여부 확인이 필요한 task
+    /// - Parameter task: 완료 / 취소 여부 확인이 필요한 task
     /// - Returns: 완료 / 취소 여부
     func checkIsCompleted(task: Task) -> Bool{
         let index = tasks.firstIndex(where: {
@@ -55,5 +56,19 @@ class TaskViewModel: ObservableObject{
         }
         
         return false
+    }
+    
+    
+    /// Task 요소 삭제 메서드
+    ///
+    /// - Parameter task: 삭제할 Task
+    func removeTask(task: Task){
+        let index = tasks.firstIndex(where: {
+            $0.id == task.id
+        })
+        
+        if let index{
+            tasks.remove(at: index)
+        }
     }
 }
