@@ -7,10 +7,19 @@
 
 import Foundation
 
-// Task 모델 선언
+
+/// Task Model
 struct Task: Identifiable, Hashable{
+    
+    /// 고유 ID
     let id: String = UUID().uuidString
-    var isComplete: Bool // 할 일 완료 여부
-    let createdAt: Date = Date() // 생성 날짜
-    let todo: String // 할 일
+    
+    /// 할 일 완료 여부
+    var isComplete: Bool
+    
+    /// 생성 날짜
+    let createdAt: Date = Date()
+    
+    /// 할 일
+    let todo: String
 }
