@@ -21,18 +21,29 @@ struct TaskListView: View {
             
             HStack{
                 Button {
-                    // TODO: task.isComplete State 변수가 아니기 때문에 toggle() 불가능. 해결 필요
+                    vm.toggleIsCompleted(task: task)
                 } label: {
-                    Image(systemName: task.isComplete ? "checkmark.square.fill" : "checkmark.square")
+                    Image(systemName: vm.checkIsCompleted(task: task) ? "checkmark.square.fill" : "checkmark.square")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
                 }
+                .padding()
+                
+                Spacer()
                 
                 Text(task.todo)
-                    .font(.title2)
+                    .font(.title3)
+                    .bold()
+                    .strikethrough(vm.checkIsCompleted(task: task))
+                    .foregroundStyle(vm.checkIsCompleted(task: task) ? .gray : .black)
+                    .padding()
             }
+            .frame(width: 350, height: 80)
         }
     }
 }
 
 #Preview {
-    TaskListView(vm: TaskViewModel(), task: Task(isComplete: false, todo: "할 일"))
+    TaskListView(vm: TaskViewModel(), task: Task(isComplete: false, todo: "description"))
 }
