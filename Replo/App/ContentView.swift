@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+/// Splash View 화면
 struct ContentView: View {
     
     @State private var isActive: Bool = false
