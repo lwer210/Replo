@@ -56,7 +56,7 @@ struct TaskListView: View {
                     
                     Text(DateFormatterManage.fullDateFormatter.string(from: task.createdAt))
                         .font(.subheadline)
-                    
+                        .foregroundStyle(vm.checkIsCompleted(task: task) ? .gray : .black)
                 }
                 .padding()
             }

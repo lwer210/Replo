@@ -21,6 +21,11 @@ struct HomeView: View {
                 }
             
             // TODO: ProfileView 추가 예정(아직 API 요청 안배움)
+                ProfileView()
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("Profile")
+                }
         }
     }
 }
