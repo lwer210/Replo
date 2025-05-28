@@ -9,7 +9,7 @@ import Foundation
 
 
 /// Task Model
-struct Task: Identifiable, Hashable{
+struct TaskModel: Identifiable, Hashable{
     
     /// 고유 ID
     let id: String = UUID().uuidString

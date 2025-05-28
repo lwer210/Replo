@@ -13,7 +13,7 @@ import SwiftUI
 class TaskViewModel: ObservableObject{
     
     /// Task 배열 필드
-    @Published var tasks: [Task] = []
+    @Published var tasks: [TaskModel] = []
     
     /// Task 검색어 필드
     @Published var taskSearchText = ""
@@ -23,7 +23,7 @@ class TaskViewModel: ObservableObject{
     /// - Parameter text: Task에 추가할 텍스트 요소값
     func addTask(text: String){
         if !text.isEmpty{ // text가 빈값이 아닐 때만 추가
-            let task = Task(isComplete: false, todo: text)
+            let task = TaskModel(isComplete: false, todo: text)
             tasks.append(task)
         }
     }
@@ -31,7 +31,7 @@ class TaskViewModel: ObservableObject{
     /// Task 완료 / 취소 처리 메서드
     ///
     /// - Parameter task: 완료 / 취소 처리할 Task
-    func toggleIsCompleted(task: Task){
+    func toggleIsCompleted(task: TaskModel){
         let index = tasks.firstIndex(where: {
             $0.id == task.id
         })
@@ -45,7 +45,7 @@ class TaskViewModel: ObservableObject{
     ///
     /// - Parameter task: 완료 / 취소 여부 확인이 필요한 task
     /// - Returns: 완료 / 취소 여부
-    func checkIsCompleted(task: Task) -> Bool{
+    func checkIsCompleted(task: TaskModel) -> Bool{
         let index = tasks.firstIndex(where: {
             $0.id == task.id
         })
@@ -62,7 +62,7 @@ class TaskViewModel: ObservableObject{
     /// Task 요소 삭제 메서드
     ///
     /// - Parameter task: 삭제할 Task
-    func removeTask(task: Task){
+    func removeTask(task: TaskModel){
         let index = tasks.firstIndex(where: {
             $0.id == task.id
         })
