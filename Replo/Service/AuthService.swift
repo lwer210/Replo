@@ -11,6 +11,7 @@ class AuthService{
     static let share = AuthService()
     
     func login(loginRequest: LoginRequest) async throws -> LoginResponse{
+        print("AuthService 호출됨")
         
         // URL 정보 생성
         guard let url = URL(string: "http://localhost:8080/api/v1/auth/login") else{
