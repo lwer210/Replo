@@ -12,7 +12,7 @@ import SwiftUI
 struct TaskListView: View {
     
     @ObservedObject var vm: TaskViewModel
-    var task: Task
+    var task: TaskModel
     
     var body: some View {
         ZStack{
@@ -66,5 +66,5 @@ struct TaskListView: View {
 }
 
 #Preview {
-    TaskListView(vm: TaskViewModel(), task: Task(isComplete: false, todo: "description"))
+    TaskListView(vm: TaskViewModel(), task: TaskModel(isComplete: false, todo: "description"))
 }
