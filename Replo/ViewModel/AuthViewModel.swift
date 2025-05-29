@@ -12,6 +12,7 @@ class AuthViewModel: ObservableObject{
     @Published var password: String = ""
     
     func login(email: String, password: String){
+        print("함수 호출됨")
         let request = LoginRequest(email: email, password: password)
         
         Task{
