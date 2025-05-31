@@ -49,18 +49,33 @@ class KeyChainUtil{
         
     }
     
-//    static func getValue(_ key: String) -> String?{
-//        let query: [String: Any] = [
-//            kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrAccount as String: key,
-//            kSecReturnData as String: true,
-//            kSecMatchLimit as String: kSecMatchLimitOne
-//        ]
-//        
-//        var item: CFTypeRef?
-//        let status = SecItemCopyMatching(query as CFDictionary, &item)
-//        
-//        
-//        
-//    }
+    /// KeyChain에 저장된 값 조회 메서드
+    ///
+    /// - Parameter key: 식별자
+    /// - Returns: 조회된 데이터
+    static func getValue(_ key: String) -> String?{
+        
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword, // KeyChain에 저장할 아이템에 종류
+            kSecAttrAccount as String: key, // 식별자
+            kSecReturnData as String: true, // 반환 여부
+            kSecMatchLimit as String: kSecMatchLimitOne // 1개만 반환
+        ]
+        
+        var item: CFTypeRef? // 조회 결과를 담을 변수
+        let status = SecItemCopyMatching(query as CFDictionary, &item) // 키체인에서 항목 조회
+        
+        
+        guard status == errSecSuccess else {
+            print("키체인 값 조회 실패 \(status)")
+            return nil
+        }
+        
+        guard let data = item as? Data, let value = String(data: data, encoding: .utf8) else {
+            print("데이터 변환 실패")
+            return nil
+        }
+        
+        return value
+    }
 }
