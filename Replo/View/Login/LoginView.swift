@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @StateObject private var vm: AuthViewModel = AuthViewModel()
+    @ObservedObject var vm: AuthViewModel
     
     var body: some View {
         VStack{
@@ -66,5 +66,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(vm: AuthViewModel())
 }
