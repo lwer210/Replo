@@ -4,13 +4,18 @@ import SwiftUI
 /// Splash View 화면
 struct ContentView: View {
     
+    @StateObject private var vm: AuthViewModel = AuthViewModel()
     @State private var isActive: Bool = false
     @State private var size = 0.5
     @State private var opacity = 0.5
     
     var body: some View {
         if isActive{
-            HomeView()
+            if vm.isLogin{
+                HomeView()
+            }else{
+                LoginView(vm: vm)
+            }
         }else{
             VStack(spacing: 20){
                 Image(systemName: "list.clipboard")
