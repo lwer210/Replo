@@ -34,6 +34,8 @@ class AuthService{
         let (data, _) = try await URLSession.shared.data(for: request) // 로그인 API 호출
         
         let decodedResponse = try JSONDecoder().decode(LoginResponse.self, from: data) // 응답 데이터 LoginResponse로 변환
+        
+        print("응답")
         return decodedResponse // 반환
     }
 }
