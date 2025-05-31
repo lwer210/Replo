@@ -10,6 +10,7 @@ import Foundation
 class AuthViewModel: ObservableObject{
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var isLogin: Bool = false
     
     func login(email: String, password: String){
         print("함수 호출됨")
@@ -18,10 +19,21 @@ class AuthViewModel: ObservableObject{
         Task{
             do{
                 let response = try await AuthService.share.login(loginRequest: request)
-                print("로그인 성공: ", response)
+                
+                let isSaved = try KeyChainUtil.saveValue(response.accessToken, "accessToken")
+                
+                guard isSaved else{
+                    print("저장 실패")
+                    isLogin = false
+                    return
+                }
+                
+                print("토큰 저장 성공")
+                isLogin = true
             }catch{
                 print("로그인 실패: ", error)
             }
         }
     }
+    
 }
